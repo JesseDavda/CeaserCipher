@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -7,8 +8,12 @@ string encryptor(string word, int num);
 string decryptor(string word, int num);
 
 int main() {
-    string main_string, choice;
+    string main_string, choice, choice_two;
     int numOfSpaces;
+    bool isRunning = true;
+
+    ofstream file;
+    file.open("ceaser.txt");
 
     cout << "Encrypt: 1" << endl;
     cout << "Decrypt: 2" << endl;
@@ -22,16 +27,55 @@ int main() {
         cin >> numOfSpaces;
 
         cout << encryptor(main_string, numOfSpaces);
+        file << encryptor(main_string, numOfSpaces);
         cout << " " << endl;
+        file.close();
 
     } else if(choice == "2") {
-        cout << "Please enter a word you want decrypted" << endl;
-        cin >> main_string;
-        cout << "please enter the amount of spaces the word was ecrypted by" << endl;
-        cin >> numOfSpaces;
 
-        cout << decryptor(main_string, numOfSpaces);
-        cout << " " << endl;
+        ifstream File_two;
+        File_two.open("ceaser.txt");
+
+        while(isRunning == true) {
+            cout << "File: 1" << endl;
+            cout << "input: 2" << endl;
+            cin >> choice_two;
+
+            if(choice_two == "1") {
+                if(File_two.is_open()) {
+                    string line;
+                    while(getline(File_two, line)) {
+                        cin >> line;
+                        bool bad = bad();
+                    }
+                    if(bad == false) {
+                        File_two.close();
+                    } else if(bad == true) {
+                        cout << "Sorry something went wrong please restart the program" << endl;
+                        isRunning = false;
+                    }
+                    main_string = line;
+                } else {
+                    cout << "The file cannot be opened you will have to enter the values manually" << endl;
+                    choice = "2";                    }
+                }
+
+                cout << "please enter the amount of spaces the word was encrypted by: ";
+                cin >> numOfSpaces;
+
+                cout << decryptor(main_string, numOfSpaces) << endl;
+                cout << " " << endl;
+
+            } else if(choice_two == "2") {
+                cout << "Please enter a word you want decrypted" << endl;
+                cin >> main_string;
+                cout << "please enter the amount of spaces the word was ecrypted by" << endl;
+                cin >> numOfSpaces;
+
+                cout << decryptor(main_string, numOfSpaces);
+                cout << " " << endl;
+            }
+        }
     }
 
 }
