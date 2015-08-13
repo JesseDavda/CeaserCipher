@@ -11,40 +11,41 @@ string decryptor(string word, int num);
 int main() {
     string main_string, choice, choice_two;
     int numOfSpaces;
-    bool isRunning = true;
+    bool isRunning = true, isRunning_first = true;
 
     ofstream file;
+    while(isRunning_first == true) {
+        cout << "Encrypt: 1" << endl;
+        cout << "Decrypt: 2" << endl;
+        cout << "exit: 3" << endl;
+        cin >> choice;
 
-    cout << "Encrypt: 1" << endl;
-    cout << "Decrypt: 2" << endl;
-    cin >> choice;
+        if(choice == "1") {
 
-    if(choice == "1") {
+            cout << "Please enter a word you want encrypted" << endl;
+            cin >> main_string;
+            cout << "please enter the amount of spaces you want word to be encrypted by" << endl;
+            cin >> numOfSpaces;
 
-        cout << "Please enter a word you want encrypted" << endl;
-        cin >> main_string;
-        cout << "please enter the amount of spaces you want word to be encrypted by" << endl;
-        cin >> numOfSpaces;
-
-        file.open("ceaser.txt");
-        cout << encryptor(main_string, numOfSpaces);
-        if(file.is_open()) {
-            file << encryptor(main_string, numOfSpaces);
+            file.open("ceaser.txt");
+            cout << encryptor(main_string, numOfSpaces);
+            if(file.is_open()) {
+                file << encryptor(main_string, numOfSpaces);
+                file.close();
+            } else {
+                cout << "Im sorry i cannont seem to open the file" << endl;
+            }
+            cout << " " << endl;
             file.close();
-        } else {
-            cout << "Im sorry i cannont seem to open the file" << endl;
-        }
-        cout << " " << endl;
-        file.close();
 
-    } else if(choice == "2") {
+        } else if(choice == "2") {
 
-        ifstream File_two;
-        File_two.open("ceaser.txt");
+            ifstream File_two;
+            File_two.open("ceaser.txt");
 
-        while(isRunning == true) {
             cout << "File: 1" << endl;
             cout << "input: 2" << endl;
+            cout << "exit: 3" << endl;
             cin >> choice_two;
 
 
@@ -71,10 +72,14 @@ int main() {
 
                 cout << decryptor(main_string, numOfSpaces);
                 cout << " " << endl;
+
+            } else if(choice == "3") {
+                isRunning_first = false;
             }
+        } else if(choice == "3") {
+            isRunning_first = false;
         }
     }
-
 }
 
 string decryptor(string word, int num) {
