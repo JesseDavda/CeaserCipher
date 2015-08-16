@@ -11,7 +11,7 @@ string decryptor(string word, int num);
 int main() {
     string main_string, choice, choice_two;
     int numOfSpaces;
-    bool isRunning = true, isRunning_first = true;
+    bool isRunning_first = true;
 
     ofstream file;
     while(isRunning_first == true) {
@@ -98,6 +98,10 @@ string decryptor(string word, int num) {
             decryptedUnicode += 26;
         }
 
+        if(unicodeLetter == 32) {
+            decryptedLetter = 32;
+        }
+
         char decryptedLetter = decryptedUnicode;
         de_main[i] = decryptedLetter;
     }
@@ -119,6 +123,10 @@ string encryptor(string word, int num) {
             encryptedUnicode -= 26;
         } else if(encryptedUnicode < 97) {
             encryptedUnicode += 26;
+        }
+
+        if(unicodeLetter == 32) {
+            encryptedLetter = 32;
         }
 
         char encryptedLetter = encryptedUnicode;
