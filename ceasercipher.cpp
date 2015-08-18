@@ -99,7 +99,7 @@ string decryptor(string word, int num) {
         }
 
         if(unicodeLetter == 32) {
-            decryptedLetter = 32;
+            decryptedUnicode = 32;
         }
 
         char decryptedLetter = decryptedUnicode;
@@ -126,7 +126,7 @@ string encryptor(string word, int num) {
         }
 
         if(unicodeLetter == 32) {
-            encryptedLetter = 32;
+            encryptedUnicode = 32;
         }
 
         char encryptedLetter = encryptedUnicode;
