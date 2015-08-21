@@ -10,13 +10,15 @@ int main() {
     cout << "Please enter a word you would like to be saved to a file: ";
     cin >> main;
 
-    file.open("ceaser.txt");
+    file.open("ceaser.txt" || ios::binary);
     if(file.is_open()) {
-        file << main << endl;
+        file >> main;
         file.close();
     } else {
         cout << "im sorry the file could not be opened" << endl;
     }
+
+    cout << main << endl;
 
     ifstream file_read;
 
